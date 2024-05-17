@@ -1,10 +1,14 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, PrivateAttr
 
 class User(BaseModel):
-    id: int
+    _id: int = PrivateAttr()
     name: str
     email: str
     password: str
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        self._id = data.get('_id', None)
 
 class Order(BaseModel):
     id: int

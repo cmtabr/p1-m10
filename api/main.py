@@ -46,47 +46,46 @@ async def login(name: str, password: str):
 async def create_order(order: Order):
     try: 
         query = insert(Orders).values(
+            id=order.id,
             username=order.username,
             email=order.email,
             description=order.description,
         )
         conn.execute(query)
         conn.commit()
-        return f'Pedido criado, {order.username}, seu identificador é {query.id}'
+        return f"Pedido criado, {order.username}, seu identificador é {order.id}"
     except Exception as e:
         return HTTPException(status_code=400, detail=str(e))
     
 @app.get("/api/v1/order/{order_id}", tags=["Orders"])
 async def read_single_order(order_id: int):
     try:
-        query = select(Orders).where(Orders.id == order_id)
-        result = conn.execute(query).first()
+        query = conn.execute(select(Orders).where(Orders.id == order_id))
+        result = query.first()
         if not result:
-            return status.HTTP_204_NO_CONTENT
-        return result
+            return {"detail": "Order not found"}, status.HTTP_204_NO_CONTENT
+        return result._asdict()
     except HTTPException:
         return HTTPException(status_code=400, detail="Pedido não encontrado")
 
-@app.get("/api/v1/order/all", tags=["Orders"])
+@app.get("/api/v1/order/", tags=["Orders"])
 async def read_all_orders():
     try:
-        query = conn.execute(select(orders))
+        query = conn.execute(select(Orders))
         result = query.fetchall()
-        orders = [{"id": order[0], "usuário": order[1], "e-mail": order[2], "descrição": order[3]} for order in result]
-        if orders == []:
-            return status.HTTP_204_NO_CONTENT
-        return orders
+        if result == None:
+            return {'detail' : 'None item to be found'}, status.HTTP_204_NO_CONTENT
+        return result._asdict()
     except Exception:
         return HTTPException(status_code=400, detail="Pedidos não encontrados")
 
 @app.put("/api/v1/order/{order_id}", tags=["Orders"])
-async def update_item(order: Order, id: int):
+async def update_item(order: Order, order_id: int):
     try: 
-        query = update(Orders).where(Orders.id == id).values(
-            username=order.title,
-            description=order.description,
-            done=order.done,
-            user_id=order.user_id
+        query = update(Orders).where(Orders.id == order_id).values(
+            username=order.username,
+            email=order.email,
+            description=order.description
         )
         conn.execute(query)
         conn.commit()
