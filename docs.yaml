@@ -1,0 +1,197 @@
+_type: export
+__export_format: 4
+__export_date: 2024-05-17T14:06:37.469Z
+__export_source: insomnia.desktop.app:v8.6.1
+resources:
+  - _id: req_59e0bd4314634ae7818bb1198159128d
+    parentId: fld_416bd60604ba4124ad899b1861207418
+    modified: 1715952655399
+    created: 1715951098210
+    url: "{{ _.base_url }}/order"
+    name: Create Order
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 1,
+        	"username" : "caio",
+        	"email" : "caio@teste.com",
+        	"description" : "Nota 10 na parte prática"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+        id: pair_a1591c6a76d046dd9c0373c834f57629
+        disabled: false
+    authentication: {}
+    metaSortKey: -1715951562520
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_416bd60604ba4124ad899b1861207418
+    parentId: wrk_60e4bebd01ca494f8572a965bc89b7c0
+    modified: 1715951551988
+    created: 1715951551988
+    name: Orders Methods
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1715951551988
+    _type: request_group
+  - _id: wrk_60e4bebd01ca494f8572a965bc89b7c0
+    parentId: null
+    modified: 1715951067027
+    created: 1715951067027
+    name: Assessment
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_31794ba0f3724b92afd6a08a6e668eb3
+    parentId: fld_416bd60604ba4124ad899b1861207418
+    modified: 1715954416299
+    created: 1715951562420
+    url: "{{ _.base_url }}/order/:order_id"
+    name: Read Specific Order
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_dac0bbc6556840519dab08a78cfcfdc4
+        name: ""
+        value: ""
+        description: ""
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+        id: pair_25f6bfb46249477d8b5c074781152325
+    authentication: {}
+    metaSortKey: -1715951562420
+    isPrivate: false
+    pathParameters:
+      - name: order_id
+        value: "1"
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_576d5898726d4c7d91061a643d9e6170
+    parentId: fld_416bd60604ba4124ad899b1861207418
+    modified: 1715954564654
+    created: 1715951903663
+    url: "{{ _.base_url }}/order/all"
+    name: Read All Orders
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1715951562320
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b10bf62a44f24d1893c3a6ac1510b5eb
+    parentId: fld_416bd60604ba4124ad899b1861207418
+    modified: 1715954644585
+    created: 1715952337776
+    url: "{{ _.base_url }}/:order_id"
+    name: Update Order
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username" : "caio",
+        	"email" : "caio@teste.com",
+        	"description" : "Nota 10 na parte prática"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.1
+        id: pair_e589614e0f6241fd831bccc3c5d6cf91
+    authentication: {}
+    metaSortKey: -1715951562220
+    isPrivate: false
+    pathParameters:
+      - name: order_id
+        value: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a83344acf1fb4b1f880d3a0104de21b0
+    parentId: fld_416bd60604ba4124ad899b1861207418
+    modified: 1715954627516
+    created: 1715954514894
+    url: "{{ _.base_url }}/:order_id"
+    name: Delete Order
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.1
+    authentication: {}
+    metaSortKey: -1715951562120
+    isPrivate: false
+    pathParameters:
+      - name: order_id
+        value: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_fb4794ae16e8b1b070a74505f21c1077e3c8aea4
+    parentId: wrk_60e4bebd01ca494f8572a965bc89b7c0
+    modified: 1715951785048
+    created: 1715951067030
+    name: Base Environment
+    data:
+      base_url: http://localhost:5000/api/v1
+    dataPropertyOrder:
+      "&":
+        - base_url
+    color: null
+    isPrivate: false
+    metaSortKey: 1715951067030
+    _type: environment
+  - _id: jar_fb4794ae16e8b1b070a74505f21c1077e3c8aea4
+    parentId: wrk_60e4bebd01ca494f8572a965bc89b7c0
+    modified: 1715951067032
+    created: 1715951067032
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar

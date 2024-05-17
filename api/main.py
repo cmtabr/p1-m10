@@ -52,11 +52,11 @@ async def create_order(order: Order):
         )
         conn.execute(query)
         conn.commit()
-        return f'Pedido criado, {order.username}, seu identificador é {order.id}'
+        return f'Pedido criado, {order.username}, seu identificador é {query.id}'
     except Exception as e:
         return HTTPException(status_code=400, detail=str(e))
     
-@app.get("/api/v1/order/", tags=["Orders"])
+@app.get("/api/v1/order/{order_id}", tags=["Orders"])
 async def read_single_order(order_id: int):
     try:
         query = select(Orders).where(Orders.id == order_id)
