@@ -1,0 +1,41 @@
+name: goliath
+
+services: 
+  backend: 
+    image: cmtabr/src
+    build: 
+      context: api
+      dockerfile: Dockerfile
+    container_name: FastAPI
+    restart: always
+    ports: 
+      - "5000:5000"
+    volumes: 
+      - ./:/app
+    depends_on: 
+      database:
+        condition: service_healthy
+    networks:
+      - network
+
+  database:
+    image: mysql:8.0.34
+    container_name: MYSQL
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: banco
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
